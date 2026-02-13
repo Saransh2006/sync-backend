@@ -12,10 +12,13 @@ app.use(express.json());
 
 // ================= OAuth Setup =================
 
+const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
 const oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET,
-   "https://sync-backend-bcum.onrender.com/oauth2callback"
+    "https://sync-backend-bcum.onrender.com/oauth2callback"
+
 );
 
 oauth2Client.setCredentials({
@@ -126,3 +129,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
 });
+
