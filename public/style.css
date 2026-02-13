@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(
+            rgba(255,255,255,0.02) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.02) 1px,
+            transparent 1px
+        );
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+
+body {
+    background: #0B1220;
+    color: #E6F1FF;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+font-family: 'Inter', sans-serif;
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 240, 255, 0.05) 0%,
+        #0B1220 40%
+    );
+    background-color: #0B1220;
+}
+
+
+.header {
+    margin-bottom: 60px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logo h1 {
+    font-size: 28px;
+    letter-spacing: 4px;
+    font-weight: 600;
+}
+
+.tagline {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-top: 8px;
+}
+
+.pulse-core {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #00F0FF;
+    box-shadow: 0 0 10px #00F0FF;
+    animation: pulseIdle 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseIdle {
+    0% {
+        box-shadow: 0 0 6px #00F0FF;
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 18px #00F0FF;
+        transform: scale(1.2);
+    }
+    100% {
+        box-shadow: 0 0 6px #00F0FF;
+        transform: scale(1);
+    }
+}
+
+.mic-button {
+    width: 125px;
+    height: 125px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    background: #111A2E;
+    color: #00F0FF;
+    font-size: 36px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.mic-button::before {
+    content: "";
+    position: absolute;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(
+        circle,
+        rgba(0,240,255,0.15) 0%,
+        transparent 60%
+    );
+    top: -40%;
+    left: -40%;
+    z-index: -1;
+    filter: blur(40px);
+}
+
+
+.mic-button:hover {
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+    transform: translateY(-3px);
+}
+
+.mic-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.mic-wave {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.mic-wave span {
+    width: 4px;
+    height: 12px;
+    background: #00F0FF;
+    border-radius: 2px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.mic-button.idle .mic-wave span {
+    height: 10px;
+    opacity: 0.5;
+}
+
+.mic-button.listening .mic-wave span {
+    animation: micWave 1s infinite ease-in-out;
+}
+.mic-button.listening {
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.9);
+}
+
+.mic-button.listening .mic-wave span:nth-child(2) { animation-delay: 0.1s; }
+.mic-button.listening .mic-wave span:nth-child(3) { animation-delay: 0.2s; }
+.mic-button.listening .mic-wave span:nth-child(4) { animation-delay: 0.3s; }
+.mic-button.listening .mic-wave span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes micWave {
+    0%, 100% { height: 10px; }
+    50% { height: 28px; }
+}
+
+
+.status {
+    margin-top: 30px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    background: #0B1220;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    z-index: 100;
+}
+
+.intro-screen h1 {
+    font-size: 40px;
+    letter-spacing: 6px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+}
+
+.intro-screen p {
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+.init-text {
+    font-size: 14px;
+    opacity: 0.5;
+    animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.hidden {
+    display: none;
+}
+
+.mainApp {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+}
