@@ -1,17 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const introScreen = document.getElementById("introScreen");
+    const mainApp = document.getElementById("mainApp");
     const micButton = document.getElementById("micButton");
     const statusText = document.getElementById("statusText");
 
+    // Smooth intro transition
+    setTimeout(() => {
+        introScreen.style.opacity = "0";
+        setTimeout(() => {
+            introScreen.style.display = "none";
+            mainApp.style.display = "block";
+        }, 600);
+    }, 1200);
+
     if (!micButton || !statusText) {
-        console.error("Missing DOM elements.");
+        console.error("UI elements missing");
         return;
     }
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-        alert("Speech Recognition not supported in this browser.");
+        alert("Speech Recognition not supported.");
         return;
     }
 
@@ -54,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            const response = await fetch("https://sync-backend-bcum.onrender.com/create-event", {
+            const response = await fetch("/create-event", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ transcript })
@@ -63,23 +74,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if (data.success) {
-                setState("Event Created ✅");
+                setState("Added");
             } else {
-                setState(data.message || "Could not detect date");
+                setState(data.message || "No date detected");
             }
 
         } catch (error) {
-            console.error("Frontend Error:", error);
+            console.error(error);
             setState("Server error");
         }
 
         setTimeout(() => {
             resetToIdle();
-        }, 2000);
+        }, 1800);
     };
 
-    recognition.onerror = (event) => {
-        console.error("Speech Error:", event.error);
+    recognition.onerror = () => {
         resetToIdle();
     };
 

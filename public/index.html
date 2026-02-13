@@ -5,20 +5,20 @@
     <title>SYNC | Voice → Calendar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Intro Screen -->
+
+    <!-- Intro Screen -->
     <div class="intro-screen" id="introScreen">
         <h1>SYNC</h1>
         <p>Personal Voice → Calendar Engine</p>
         <span class="init-text">Initializing...</span>
     </div>
 
-    <div class="mainApp">
+    <!-- Main App -->
+    <div class="mainApp" id="mainApp" style="display:none;">
 
-        <!-- Header -->
         <header class="header">
             <div class="logo">
                 <div class="pulse-core" id="pulseCore"></div>
@@ -27,22 +27,18 @@
             <p class="tagline">Voice → Calendar</p>
         </header>
 
-        <!-- Main Section -->
         <main class="main">
 
-            <!-- Mic Button -->
             <button class="mic-button" id="micButton">
-    <div class="mic-wave">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</button>
+                <div class="mic-wave">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
 
-
-            <!-- Status Text -->
             <p class="status" id="statusText">
                 Idle
             </p>
